@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/app.js" defer></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <h2>Employee Management System</h2>
+
+    <button onclick="openForm()">Add Employee</button>
+
+    <div class="top-bar">
+    <button id="logoutBtn">Logout</button>
+    <input type="text" id="searchEmployee" placeholder="Search Employees..." onkeyup="searchEmployee()">
+    </div>
+
+
+    <div id="employeeForm" style="display: none;">
+        <input type="hidden" id="emp_id">
+        
+        <label for="emp_name">Employee Name</label>
+        <input type="text" id="emp_name" placeholder="Enter employee name">
+
+        <label for="emp_department">Department</label>
+        <select id="emp_department">
+            <option disabled selected>Select Department</option>
+            <option value="1">HR</option>
+            <option value="2">Engineering</option>
+        </select>
+        
+        <label for="emp_position">Position</label>
+        <select id="emp_position">
+            <option disabled selected>Select Position</option>
+            <option value="1">Manager</option>
+            <option value="2">Developer</option>
+        </select>
+        
+        <button onclick="saveEmployee()">Save</button>
+        <button onclick="closeForm()">Cancel</button>
+    </div>
+
+    <table id="employeeTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Position</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+	<!-- Pagination Controls -->
+<div class="pagination">
+    <button onclick="prevPage()">Previous</button>
+    <span id="pageNumber">1</span>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+	<script>
+    $(document).ready(function () {
+        let user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+            window.location.href = "login.html";
+        }
+
+        $("#logoutBtn").click(function () {
+            localStorage.removeItem("user");
+            window.location.href = "login.html";
+        });
+    });
+</script>
+</body>
+</html>
+
